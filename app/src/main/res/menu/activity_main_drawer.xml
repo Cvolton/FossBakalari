@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_ukoly"
+            android:icon="@drawable/ic_ukoly"
+            android:title="@string/nav_item_ukoly" />
+        <item
+            android:id="@+id/nav_rozvrh"
+            android:icon="@drawable/ic_rozvrh"
+            android:title="@string/nav_item_rozvrh" />
+        <item
+            android:id="@+id/nav_znamky"
+            android:icon="@drawable/ic_znamky"
+            android:title="@string/nav_item_znamky" />
+        <item
+            android:id="@+id/nav_absence"
+            android:icon="@drawable/ic_absence"
+            android:title="@string/nav_item_absence" />
+    </group>
+
+    <item android:title="jméno pro kategorii vymyslet">
+        <menu>
+            <item
+                android:id="@+id/nav_suplovani"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/nav_item_suplovani" />
+            <item
+                android:id="@+id/nav_akce"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_item_akce" />
+        </menu>
+    </item>
+    <item android:title="@string/nav_item_komens">
+        <menu>
+            <item
+                android:id="@+id/nav_komens_received"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/nav_item_komens_received" />
+            <item
+                android:id="@+id/nav_komens_sent"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_item_komens_sent" />
+        </menu>
+    </item>
+    <item android:title="jméno pro kategorii vymyslet">
+        <menu>
+            <item
+                android:id="@+id/nav_predmety"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_item_predmety" />
+            <item
+                android:id="@+id/nav_pololetni"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_item_pololetni" />
+            <item
+                android:id="@+id/nav_vyuka"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_item_vyuka" />
+        </menu>
+    </item>
+
+</menu>

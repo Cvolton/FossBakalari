@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Fossaláři</string>
+    <string name="action_settings">Nastavení</string>
+    <string name="error_user_not_found">Uživatel nenalezen</string>
+    <string name="error_unknown">Došlo k neznámé chybě.</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_item_ukoly">Úkoly</string>
+    <string name="nav_item_rozvrh">Rozvrh</string>
+    <string name="nav_item_znamky">Známky</string>
+    <string name="nav_item_akce">Plán akcí</string>
+    <string name="nav_item_suplovani">Suplování</string>
+    <string name="nav_item_komens">Komens</string>
+    <string name="nav_item_komens_received">Přijaté</string>
+    <string name="nav_item_komens_sent">Odeslané</string>
+    <string name="nav_item_vyuka">Výuka</string>
+    <string name="nav_item_absence">Absence</string>
+    <string name="nav_item_pololetni">Pololetí</string>
+    <string name="nav_item_predmety">Předměty</string>
+</resources>
