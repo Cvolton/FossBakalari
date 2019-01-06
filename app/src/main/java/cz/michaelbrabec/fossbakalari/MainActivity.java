@@ -14,12 +14,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SharedPrefHandler sharedPrefHandler = new SharedPrefHandler();
+    String bakalariUrl;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        String token = sharedPrefHandler.getString(this, "tokenBase");
+        token = sharedPrefHandler.getString(this, "tokenBase");
         String loginJmeno = sharedPrefHandler.getString(this, "loginJmeno");
         String loginSkola = sharedPrefHandler.getString(this, "loginStrtyp");
+        bakalariUrl = sharedPrefHandler.getString(this, "bakalariUrl");
         if(token.equals("") || loginJmeno.equals("") || loginSkola.equals("")){
             Intent intent = new Intent(this, LoginScreen.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -98,20 +102,25 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawers();
+
         int id = item.getItemId();
 
         if (id == R.id.nav_absence) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_rozvrh) {
-
+            Intent intent = new Intent(getApplicationContext(), RozvrhActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+            this.overridePendingTransition(0, 0);
         } else if (id == R.id.nav_ukoly) {
-
+            Intent intent = new Intent(getApplicationContext(), UkolyActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
         } else if (id == R.id.nav_znamky) {
 
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        //drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }

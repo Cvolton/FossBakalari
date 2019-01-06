@@ -229,6 +229,7 @@ public class LoginScreen extends AppCompatActivity {
 
     public void onTokenVerify(String result){
         final TextView textUnderButton = findViewById(R.id.textUnderButton);
+        final TextView textBakalari = findViewById(R.id.textBakalari);
         try{
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
             XmlPullParser myParser = xmlFactoryObject.newPullParser();
@@ -250,7 +251,6 @@ public class LoginScreen extends AppCompatActivity {
                 return;
             }
 
-
             SharedPrefHandler.setString(this, "tokenBase", tokenBase);
             SharedPrefHandler.setString(this, "loginJmeno", getValue("jmeno", element));
             SharedPrefHandler.setString(this,"loginSkola", getValue("skola", element));
@@ -259,6 +259,7 @@ public class LoginScreen extends AppCompatActivity {
             SharedPrefHandler.setString(this,"loginModuly", getValue("moduly", element));
             SharedPrefHandler.setString(this,"loginTyp", getValue("typ", element));
             SharedPrefHandler.setString(this,"loginStrtyp", getValue("strtyp", element));
+            SharedPrefHandler.setString(this,"bakalariUrl", textBakalari.getText().toString());
 
             startBakalari();
 
@@ -299,7 +300,7 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     private void startBakalari(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, UkolyActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
