@@ -30,7 +30,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -89,7 +92,7 @@ public class UkolyActivity extends MainActivity {
             int eventType = parser.getEventType();
 
 
-            String tagName = "", tagContent = "", predmet = "", popis = "";
+            String tagName = "", tagContent = "", predmet = "", nakdy = "", popis = "";
             int event = parser.getEventType();
 
             while (event != XmlPullParser.END_DOCUMENT) {
@@ -109,7 +112,9 @@ public class UkolyActivity extends MainActivity {
                                 break;
                             case "popis": popis = tagContent;
                                 break;
-                            case "status": renderUkol(predmet, popis, tagContent);
+                            case "nakdy": nakdy = tagContent;
+                                break;
+                            case "status": renderUkol(predmet, popis, tagContent, nakdy);
                                 break;
                         }
                         break;
@@ -124,8 +129,17 @@ public class UkolyActivity extends MainActivity {
         }
     }
 
-    public void renderUkol(String predmet, String popis, String status){
-        Log.d("renderUkol", predmet + ";" + popis + ";" + status);
+    public void renderUkol(String predmet, String popis, String status, String nakdy){
+        Log.d("renderUkol", predmet + ";" + popis + ";" + status + ";" + nakdy);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmm");
+        try {
+            Date d = sdf.parse(nakdy);
+            sdf.applyPattern("dd.MM.yyyy");
+            nakdy = sdf.format(d);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
 
         popis = popis.replace("<br />", "\n");
 
@@ -221,6 +235,13 @@ public class UkolyActivity extends MainActivity {
         popisView.setText(popis);
         params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutWithTextViews.addView(popisView, params);
+
+        TextView nakdyView = new TextView(this);
+        nakdyView.setText(nakdy);
+        nakdyView.setGravity(Gravity.RIGHT);
+        params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.rightMargin = checkboxMargin;
+        layoutWithTextViews.addView(nakdyView, params);
 
         /*      <View
                     android:id="@+id/divider3"
