@@ -1,11 +1,17 @@
 package cz.michaelbrabec.fossbakalari;
 
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -68,7 +74,7 @@ public class UkolyActivity extends MainActivity {
     public void updateUkolyList(String ukoly)
 
     {
-        TextView temporary = findViewById(R.id.textView12);
+        //TextView temporary = findViewById(R.id.textView12);
         //temporary.setText(ukoly);
         XmlPullParserFactory parserFactory;
         try {
@@ -137,10 +143,18 @@ public class UkolyActivity extends MainActivity {
     public void renderUkol(String predmet, String popis, String status){
         Log.d("renderUkol", predmet + ";" + popis + ";" + status);
 
+        popis = popis.replace("<br />", "\n");
+
+        Resources r = this.getResources();
+
         //very top linearlayout (not including this causes it to fall apart for some reason)
         LinearLayout parent = findViewById(R.id.topParentUkoly);
 
         //linearlayout with checkbox
+        /* <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">   */
 
         LinearLayout layoutWithCheckbox = new LinearLayout(this);
 
@@ -150,38 +164,98 @@ public class UkolyActivity extends MainActivity {
         parent.addView(layoutWithCheckbox);
 
         //the checkbox itself
+        /*<CheckBox
+                    android:id="@+id/checkBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="0"
+                    android:orientation="vertical" />   */
         CheckBox checkBox = new CheckBox(this);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.leftMargin = 10;
+        params.gravity = Gravity.CENTER_VERTICAL;
+
+        if(status.equals("probehlo")){
+            checkBox.setChecked(true);
+        }
+
+        int checkboxMargin = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                10,
+                r.getDisplayMetrics()
+        );
+        params.setMargins(checkboxMargin, 0, checkboxMargin, 0);
 
         layoutWithCheckbox.addView(checkBox, params);
 
         //another nested layout for textviews
+
+        /*
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"> */
 
         LinearLayout layoutWithTextViews = new LinearLayout(this);
 
         layoutWithTextViews.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         layoutWithTextViews.setOrientation(LinearLayout.VERTICAL);
 
+        layoutWithCheckbox.addView(layoutWithTextViews);
+
         //textviews
+        /*
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Matematika"
+                        android:textColor="#000"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vypočítejte polohu kružnice na reálné ose v souřadnicovém systému za použití znalostí gaussovy..." /> */
+
         TextView predmetView = new TextView(this);
         predmetView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
-        predmetView.setTextColor(0);
+        predmetView.setTextColor(Color.BLACK);
         predmetView.setText(predmet);
         params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.leftMargin = 10;
-        layoutWithCheckbox.addView(predmetView, params);
+        layoutWithTextViews.addView(predmetView, params);
 
         TextView popisView = new TextView(this);
+        popisView.setText(popis);
         params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.leftMargin = 10;
-        layoutWithCheckbox.addView(popisView, params);
+        layoutWithTextViews.addView(popisView, params);
+
+        /*      <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="?android:attr/listDivider" />
+                </LinearLayout>         */
 
         View divider = new View(this);
-        params = new LinearLayout.LayoutParams(1, 10);
-        params.setMargins(10,10,10,10);
-        divider.setBackgroundColor(000);
-        parent.addView(divider);
+
+        int dividerHeight = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                1,
+                r.getDisplayMetrics()
+        );
+
+        params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dividerHeight);
+        params.setMargins(checkboxMargin,checkboxMargin,checkboxMargin,checkboxMargin);
+        divider.setBackgroundResource(android.R.drawable.divider_horizontal_textfield);
+
+        parent.addView(divider, params);
     }
 }
