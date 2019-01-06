@@ -165,6 +165,8 @@ public class UkolyActivity extends MainActivity {
             checkBox.setChecked(true);
         }
 
+        checkBox.setClickable(false);
+
         int checkboxMargin = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
                 10,

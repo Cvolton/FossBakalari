@@ -72,9 +72,6 @@ public class MainActivity extends AppCompatActivity
             navJmeno.setText(loginJmeno);
             navSkola.setText(loginSkola);
         }
-
-
-
     }
 
     @Override
