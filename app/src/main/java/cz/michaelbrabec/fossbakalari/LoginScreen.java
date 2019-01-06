@@ -48,7 +48,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class LoginScreen extends AppCompatActivity {
 
-    SharedPreferences prefs;
+    String tokenBase;
+    SharedPrefHandler sharedPrefHandler = new SharedPrefHandler();
 
     private class GetLoginContentTask extends AsyncTask<String, Integer, String> {
         protected String doInBackground(String... urls) {
@@ -143,13 +144,6 @@ public class LoginScreen extends AppCompatActivity {
                     new GetLoginContentTask().execute(textBakalari.getText() + "/login.aspx?gethx=" + textJmeno.getText());
                 }
         });
-
-        prefs = getSharedPreferences("cz.michaelbrabec.fossbakalari", Context.MODE_PRIVATE);
-
-        String token = prefs.getString("tokenBase", "");
-        if(token != ""){
-            //this.finish();
-        }
     }
 
     @Override
@@ -206,15 +200,11 @@ public class LoginScreen extends AppCompatActivity {
                 Log.d("HashPasswd", hashPasswd);
 
                 //We still to generate the token though
-                String token = "*login*" + textJmeno.getText() + "*pwd*" + hashPasswd + "*sgn*ANDR";
-                //saving the token in this form so we can reuse it later, the official Bakaláři app does the same thing
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("tokenBase", token);
-                editor.commit();
+                tokenBase = "*login*" + textJmeno.getText() + "*pwd*" + hashPasswd + "*sgn*ANDR";
                 //continue
-                token = generateTokenFromBase(token);
+                String token = generateTokenFromBase(tokenBase);
                 Log.d("hashPasswd", token);
-                textUnderButton.setText("Token se podařilo vypočítat. Ověřuji přihlašování");
+                textUnderButton.setText(R.string.login_token_success);
                 //verify if the token is correct and get real name + school
                 new GetTokenVerificationTask().execute(textBakalari.getText() + "/login.aspx?hx="+token+"&pm=login");
             }else{
@@ -239,6 +229,49 @@ public class LoginScreen extends AppCompatActivity {
 
     public void onTokenVerify(String result){
         final TextView textUnderButton = findViewById(R.id.textUnderButton);
+        try{
+            XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
+            XmlPullParser myParser = xmlFactoryObject.newPullParser();
+            InputStream is = new ByteArrayInputStream(result.getBytes("UTF-8"));
+            myParser.setInput(is, null);
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(is);
+
+            Element element=doc.getDocumentElement();
+            element.normalize();
+
+            Log.d("TokenVerify", result);
+
+            String response = getValue("result", element);
+            if(response.equals("-1")) {
+                textUnderButton.setText(R.string.error_password_incorrect);
+                return;
+            }
+
+
+            SharedPrefHandler.setString(this, "tokenBase", tokenBase);
+            SharedPrefHandler.setString(this, "loginJmeno", getValue("jmeno", element));
+            SharedPrefHandler.setString(this,"loginSkola", getValue("skola", element));
+            SharedPrefHandler.setString(this,"loginTrida", getValue("trida", element));
+            SharedPrefHandler.setString(this,"loginRocnik", getValue("rocnik", element));
+            SharedPrefHandler.setString(this,"loginModuly", getValue("moduly", element));
+            SharedPrefHandler.setString(this,"loginTyp", getValue("typ", element));
+            SharedPrefHandler.setString(this,"loginStrtyp", getValue("strtyp", element));
+
+            startBakalari();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
         textUnderButton.setText(result);
     }
 
@@ -266,6 +299,8 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     private void startBakalari(){
-
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

@@ -2,7 +2,9 @@
     <string name="app_name">Fossaláři</string>
     <string name="action_settings">Nastavení</string>
     <string name="error_user_not_found">Uživatel nenalezen</string>
+    <string name="error_password_incorrect">Špatné heslo</string>
     <string name="error_unknown">Došlo k neznámé chybě.</string>
+    <string name="login_token_success">Token se podařilo vypočítat. Ověřuji přihlašování</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
