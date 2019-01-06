@@ -2,6 +2,7 @@ package cz.michaelbrabec.fossbakalari;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class SharedPrefHandler {
     public String getString(Context context, String key){
@@ -14,5 +15,10 @@ public class SharedPrefHandler {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(key, value);
         editor.apply();
+    }
+    public Boolean getDefaultBool(Context context, String key){
+        return PreferenceManager
+                .getDefaultSharedPreferences(context)
+                .getBoolean(key, false);
     }
 }

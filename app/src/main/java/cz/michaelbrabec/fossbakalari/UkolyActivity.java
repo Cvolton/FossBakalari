@@ -95,6 +95,8 @@ public class UkolyActivity extends MainActivity {
             String tagName = "", tagContent = "", predmet = "", nakdy = "", popis = "";
             int event = parser.getEventType();
 
+            Ukol currentUkol = new Ukol();
+
             while (event != XmlPullParser.END_DOCUMENT) {
                 tagName = parser.getName();
 
@@ -108,13 +110,13 @@ public class UkolyActivity extends MainActivity {
 
                     case XmlPullParser.END_TAG:
                         switch(tagName) {
-                            case "predmet": predmet = tagContent;
+                            case "predmet": currentUkol.predmet = tagContent;
                                 break;
-                            case "popis": popis = tagContent;
+                            case "popis": currentUkol.popis = tagContent;
                                 break;
-                            case "nakdy": nakdy = tagContent;
+                            case "nakdy": currentUkol.nakdy = tagContent;
                                 break;
-                            case "status": renderUkol(predmet, popis, tagContent, nakdy);
+                            case "status": currentUkol.status = tagContent; renderUkol(currentUkol);
                                 break;
                         }
                         break;
@@ -129,17 +131,12 @@ public class UkolyActivity extends MainActivity {
         }
     }
 
-    public void renderUkol(String predmet, String popis, String status, String nakdy){
-        Log.d("renderUkol", predmet + ";" + popis + ";" + status + ";" + nakdy);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmm");
-        try {
-            Date d = sdf.parse(nakdy);
-            sdf.applyPattern("dd.MM.yyyy");
-            nakdy = sdf.format(d);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
+    public void renderUkol(Ukol currentUkol){
+        String predmet = currentUkol.predmet;
+        String popis = currentUkol.popis;
+        String status = currentUkol.status;
+        String nakdy = currentUkol.getNakdyString();
+        Date d = currentUkol.getNakdyDate();
 
         popis = popis.replace("<br />", "\n");
 
@@ -175,7 +172,7 @@ public class UkolyActivity extends MainActivity {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_VERTICAL;
 
-        if(status.equals("probehlo")){
+        if(status.equals("probehlo") || (sharedPrefHandler.getDefaultBool(this, "ukoly_check_late") && d.compareTo(new Date()) < 0) ){
             checkBox.setChecked(true);
         }
 
