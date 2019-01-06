@@ -52,17 +52,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(!skipInit){
-            token = sharedPrefHandler.getString(this, "tokenBase");
-            String loginJmeno = sharedPrefHandler.getString(this, "loginJmeno");
-            String loginSkola = sharedPrefHandler.getString(this, "loginStrtyp");
-            bakalariUrl = sharedPrefHandler.getString(this, "bakalariUrl");
-            if(token.equals("") || loginJmeno.equals("") || loginSkola.equals("") || bakalariUrl.equals("")){
-                Intent intent = new Intent(this, LoginScreen.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-
+        token = sharedPrefHandler.getString(this, "tokenBase");
+        String loginJmeno = sharedPrefHandler.getString(this, "loginJmeno");
+        String loginSkola = sharedPrefHandler.getString(this, "loginStrtyp");
+        bakalariUrl = sharedPrefHandler.getString(this, "bakalariUrl");
+        if(token.equals("") || loginJmeno.equals("") || loginSkola.equals("") || bakalariUrl.equals("")){
+            Intent intent = new Intent(this, LoginScreen.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }else{
             try{
                 token = generateTokenFromBase(token);
             } catch (NoSuchAlgorithmException e) {
@@ -73,9 +71,9 @@ public class MainActivity extends AppCompatActivity
 
             navJmeno.setText(loginJmeno);
             navSkola.setText(loginSkola);
-
-            skipInit = true;
         }
+
+
 
     }
 

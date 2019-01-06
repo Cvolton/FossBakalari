@@ -68,7 +68,9 @@ public class UkolyActivity extends MainActivity {
 
         setTitle(R.string.nav_item_ukoly); //workaround so we can have the name hardcoded to Fossaláři, so our app doesn't get renamed to Úkoly
 
-        new GetUkolyTask().execute(bakalariUrl + "/login.aspx?hx="+token+"&pm=ukoly");
+        if(!token.isEmpty()){
+            new GetUkolyTask().execute(bakalariUrl + "/login.aspx?hx="+token+"&pm=ukoly");
+        }
     }
 
     public void updateUkolyList(String ukoly)
@@ -115,24 +117,6 @@ public class UkolyActivity extends MainActivity {
 
                 event = parser.next();
             }
-
-            /*while (eventType != XmlPullParser.END_DOCUMENT) {
-                String eltName = null;
-
-                switch (eventType) {
-                    case XmlPullParser.START_TAG:
-                        String predmet = parser.nextText();
-                        String popis = parser.nextText();
-                        String status = parser.nextText();
-
-                        Log.d("updateUkolyList", predmet + ";" + popis + ";" + status);
-
-                        renderUkol(predmet, popis, status);
-                        break;
-                }
-
-                eventType = parser.next();
-            }*/
 
         } catch (XmlPullParserException e) {
 
