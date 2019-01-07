@@ -1,7 +1,7 @@
 package cz.michaelbrabec.fossbakalari;
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
+import com.google.android.material.navigation.NavigationView;
 import android.widget.FrameLayout;
 
 public class RozvrhActivity extends MainActivity {

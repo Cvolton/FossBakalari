@@ -1,15 +1,12 @@
 package cz.michaelbrabec.fossbakalari;
 
 import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.content.ContextCompat;
+
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -17,10 +14,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -30,13 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-
-import javax.xml.parsers.ParserConfigurationException;
-
 
 
 public class UkolyActivity extends MainActivity {

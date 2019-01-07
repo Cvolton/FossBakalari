@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,50 +13,133 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
+        android:baselineAligned="false"
         tools:layout_editor_absoluteY="8dp">
 
-        <EditText
-            android:id="@+id/textJmeno"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/bakalari_logo" />
+
+        <TextView
+            android:id="@+id/signin"
+            android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="10dp"
-            android:ems="10"
-            android:hint="Jméno"
-            android:inputType="text" />
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:text="Přihlašte se" />
 
-        <EditText
+        <TextView
+            android:id="@+id/tobakalari"
+            android:textColor="#000"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:text="do školního systému Bakaláři." />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:hint="@string/hint_username"
+            app:hintEnabled="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textJmeno"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:hint="@string/hint_password"
+            app:hintEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textHeslo"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--<EditText
             android:id="@+id/textHeslo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:ems="10"
             android:hint="Heslo"
-            android:inputType="textPassword" />
+            android:inputType="textPassword" />-->
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:hint="@string/hint_bakaweb"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textBakalari"
+                android:inputType="textUri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="https://bakalari.uzlabina.cz/" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--<EditText
             android:id="@+id/textBakalari"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:ems="10"
             android:inputType="textUri"
-            android:text="https://bakalari.uzlabina.cz/" />
-
-        <Button
-            android:id="@+id/buttonLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="Přihlásit" />
+            android:text="https://bakalari.uzlabina.cz/" />-->
 
         <TextView
             android:id="@+id/textUnderButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:layout_margin="10dp"
             android:layout_marginVertical="5dp"
-            android:layout_margin="10dp" />
+            android:text="" />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|right"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/action_login" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

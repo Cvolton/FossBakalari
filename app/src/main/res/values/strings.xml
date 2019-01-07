@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Fossaláři</string>
     <string name="action_settings">Nastavení</string>
+    <string name="action_login">Přihlásit</string>
+    <string name="hint_bakaweb">Adresa bakalářů</string>
+    <string name="hint_username">Jméno</string>
+    <string name="hint_password">Heslo</string>
     <string name="error_user_not_found">Uživatel nenalezen</string>
     <string name="error_password_incorrect">Špatné heslo</string>
     <string name="error_unknown">Došlo k neznámé chybě.</string>

@@ -1,22 +1,22 @@
 package cz.michaelbrabec.fossbakalari;
 
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -138,8 +138,8 @@ public class LoginScreen extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
-                    final TextView textBakalari = findViewById(R.id.textBakalari);
-                    final TextView textJmeno = findViewById(R.id.textJmeno);
+                    final TextInputEditText textBakalari = findViewById(R.id.textBakalari);
+                    final TextInputEditText textJmeno = findViewById(R.id.textJmeno);
 
                     new GetLoginContentTask().execute(textBakalari.getText() + "/login.aspx?gethx=" + textJmeno.getText());
                 }
@@ -170,9 +170,9 @@ public class LoginScreen extends AppCompatActivity {
 
     public void onLoginFinish(String result){
         final TextView textUnderButton = findViewById(R.id.textUnderButton);
-        final TextView textJmeno = findViewById(R.id.textJmeno);
-        final TextView textBakalari = findViewById(R.id.textBakalari);
-        final TextView textHeslo = findViewById(R.id.textHeslo);
+        final TextInputEditText textJmeno = findViewById(R.id.textJmeno);
+        final TextInputEditText textBakalari = findViewById(R.id.textBakalari);
+        final TextInputEditText textHeslo = findViewById(R.id.textHeslo);
         //textUnderButton.setText(result);
 
         try{
@@ -229,7 +229,7 @@ public class LoginScreen extends AppCompatActivity {
 
     public void onTokenVerify(String result){
         final TextView textUnderButton = findViewById(R.id.textUnderButton);
-        final TextView textBakalari = findViewById(R.id.textBakalari);
+        final TextInputEditText textBakalari = findViewById(R.id.textBakalari);
         try{
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
             XmlPullParser myParser = xmlFactoryObject.newPullParser();
