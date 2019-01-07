@@ -17,8 +17,12 @@ public class SharedPrefHandler {
         editor.apply();
     }
     public Boolean getDefaultBool(Context context, String key){
+        return this.getDefaultBool(context, key, false);
+    }
+
+    public Boolean getDefaultBool(Context context, String key, Boolean defValue){
         return PreferenceManager
                 .getDefaultSharedPreferences(context)
-                .getBoolean(key, false);
+                .getBoolean(key, defValue);
     }
 }

@@ -81,7 +81,7 @@ public class UkolyActivity extends MainActivity {
             int eventType = parser.getEventType();
 
 
-            String tagName = "", tagContent = "", predmet = "", nakdy = "", popis = "";
+            String tagName, tagContent = "";
             int event = parser.getEventType();
 
             Ukol currentUkol = new Ukol();
@@ -161,7 +161,7 @@ public class UkolyActivity extends MainActivity {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_VERTICAL;
 
-        if(status.equals("probehlo") || (sharedPrefHandler.getDefaultBool(this, "ukoly_check_late") && d.compareTo(new Date()) < 0) ){
+        if(status.equals("probehlo") || (sharedPrefHandler.getDefaultBool(this, "ukoly_check_late", true) && d.compareTo(new Date()) < 0) ){
             checkBox.setChecked(true);
         }
 

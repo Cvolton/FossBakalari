@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         String loginSkola = sharedPrefHandler.getString(this, "loginStrtyp");
         bakalariUrl = sharedPrefHandler.getString(this, "bakalariUrl");
         if(token.equals("") || loginJmeno.equals("") || loginSkola.equals("") || bakalariUrl.equals("")){
-            Intent intent = new Intent(this, LoginScreen.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }else{
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    //TODO: merge duplicate methods from here and LoginScreen (getWebContent, generateTokenFromBase, getSha512)
+    //TODO: merge duplicate methods from here and LoginActivity (getWebContent, generateTokenFromBase, getSha512)
     public String getWebContent(URL url){
         try{
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
