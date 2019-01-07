@@ -137,7 +137,13 @@ public class MainActivity extends AppCompatActivity
                 }
             }, drawerDelay);
         } else if (id == R.id.nav_znamky) {
-
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getApplicationContext(), ZnamkyActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent);
+                }
+            }, drawerDelay);
         }
 
         //drawer.closeDrawer(GravityCompat.START);
