@@ -1,2 +1,2 @@
-# Fosskaláři
-An unofficial client for the Bakaláři school system
+# Bakalab
+Neoficiální klient ke školnímu systému Bakaláři
