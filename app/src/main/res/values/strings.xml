@@ -27,6 +27,8 @@
     <string name="nav_item_absence">Absence</string>
     <string name="nav_item_pololetni">Pololetí</string>
     <string name="nav_item_predmety">Předměty</string>
+    <string name="tab_ukoly_1">Aktivní</string>
+    <string name="tab_ukoly_2">Ukončené</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->

@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import com.google.android.material.navigation.NavigationView;
-import androidx.core.content.ContextCompat;
+import com.google.android.material.tabs.TabLayout;
 
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -26,6 +26,8 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+
+import androidx.viewpager.widget.ViewPager;
 
 
 public class UkolyActivity extends MainActivity {
@@ -53,7 +55,36 @@ public class UkolyActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
-        getLayoutInflater().inflate(R.layout.content_ukoly, contentFrameLayout);
+        getLayoutInflater().inflate(R.layout.content_ukoly_main, contentFrameLayout);
+
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_ukoly_1));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_ukoly_2));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setTabTextColors(getResources().getColor(R.color.colorHintTextLight),
+                getResources().getColor(R.color.colorPrimaryTextLight));
+
+        final ViewPager viewPager = findViewById(R.id.pager);
+        final UkolyPagerAdapter adapter = new UkolyPagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         NavigationView navView = findViewById(R.id.nav_view);
         navView.getMenu().getItem(0).setChecked(true);
@@ -131,9 +162,6 @@ public class UkolyActivity extends MainActivity {
 
         Resources r = this.getResources();
 
-        //very top linearlayout (not including this causes it to fall apart for some reason)
-        LinearLayout parent = findViewById(R.id.topParentUkoly);
-
         //linearlayout with checkbox
         /* <LinearLayout
                 android:layout_width="match_parent"
@@ -144,8 +172,6 @@ public class UkolyActivity extends MainActivity {
 
         layoutWithCheckbox.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f));
         layoutWithCheckbox.setOrientation(LinearLayout.HORIZONTAL);
-
-        parent.addView(layoutWithCheckbox);
 
         //the checkbox itself
         /*<CheckBox
@@ -161,9 +187,15 @@ public class UkolyActivity extends MainActivity {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_VERTICAL;
 
+        LinearLayout parent = findViewById(R.id.topParentUkolyTab1);
         if(status.equals("probehlo") || (sharedPrefHandler.getDefaultBool(this, "ukoly_check_late", true) && d.compareTo(new Date()) < 0) ){
+            //very top linearlayout (not including this causes it to fall apart for some reason)
+            parent = findViewById(R.id.topParentUkolyTab2);
+
             checkBox.setChecked(true);
         }
+
+        parent.addView(layoutWithCheckbox);
 
         checkBox.setClickable(false);
 

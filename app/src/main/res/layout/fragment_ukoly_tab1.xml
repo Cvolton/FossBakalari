@@ -7,17 +7,16 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ScrollView
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollViewUkoly">
+        android:id="@+id/scrollViewUkolyTab1">
 
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/topParentUkoly">
+            android:id="@+id/topParentUkolyTab1">
 
             <!--<LinearLayout
                 android:layout_width="match_parent"
