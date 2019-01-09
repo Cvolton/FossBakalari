@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class Parser {
+public class Utils {
 
     public static String parseDate(String rawDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmm", Locale.US);

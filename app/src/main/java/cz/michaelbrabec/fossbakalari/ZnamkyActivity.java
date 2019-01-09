@@ -1,7 +1,5 @@
 package cz.michaelbrabec.fossbakalari;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import cz.michaelbrabec.fossbakalari.Utils.ItemClickSupport;
-import cz.michaelbrabec.fossbakalari.Utils.Parser;
+import cz.michaelbrabec.fossbakalari.Utils.Utils;
 
 public class ZnamkyActivity extends MainActivity implements SwipeRefreshLayout.OnRefreshListener{
 
@@ -164,7 +162,7 @@ public class ZnamkyActivity extends MainActivity implements SwipeRefreshLayout.O
                                     break;
                                 case "zn": znamka.znamka = tagContent;
                                     break;
-                                case "udeleno": znamka.datum = Parser.parseDate(tagContent);
+                                case "udeleno": znamka.datum = Utils.parseDate(tagContent);
                                     break;
                                 case "vaha": znamka.vaha = tagContent;
                                     break;
