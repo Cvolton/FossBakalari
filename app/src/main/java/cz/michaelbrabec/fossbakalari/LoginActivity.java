@@ -229,6 +229,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onTokenVerify(String result){
         final TextView textUnderButton = findViewById(R.id.textUnderButton);
+        final TextView textJmeno = findViewById(R.id.textJmeno);
         final TextInputEditText textBakalari = findViewById(R.id.textBakalari);
         try{
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
@@ -251,6 +252,8 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
+            String bakaurl = textBakalari.getText().toString();
+            //SharedPrefHandler.setCurrentUserString(this, bakaurl, textJmeno.getText().toString());
             SharedPrefHandler.setString(this, "tokenBase", tokenBase);
             SharedPrefHandler.setString(this, "loginJmeno", getValue("jmeno", element));
             SharedPrefHandler.setString(this,"loginSkola", getValue("skola", element));
@@ -259,7 +262,7 @@ public class LoginActivity extends AppCompatActivity {
             SharedPrefHandler.setString(this,"loginModuly", getValue("moduly", element));
             SharedPrefHandler.setString(this,"loginTyp", getValue("typ", element));
             SharedPrefHandler.setString(this,"loginStrtyp", getValue("strtyp", element));
-            SharedPrefHandler.setString(this,"bakalariUrl", textBakalari.getText().toString());
+            SharedPrefHandler.setString(this,"bakalariUrl", bakaurl);
 
             startBakalari();
 
