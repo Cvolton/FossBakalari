@@ -1,9 +1,12 @@
 package cz.michaelbrabec.fossbakalari;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class ZnamkyBasicAdapter extends RecyclerView.Adapter<ZnamkyBasicAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ZnamkyItem znamkyItem = znamkyList.get(position);
+        final ZnamkyItem znamkyItem = znamkyList.get(position);
         holder.znamka.setText(znamkyItem.getZnamka());
         holder.vaha.setText("váha: " + znamkyItem.getVaha());
         holder.predmet.setText(znamkyItem.getPredmet());
