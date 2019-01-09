@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Ukol {
+public class UkolItem {
     public String predmet;
     public String popis;
     public String status;
