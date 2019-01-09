@@ -101,10 +101,10 @@ public class ZnamkyActivity extends MainActivity implements SwipeRefreshLayout.O
 
                         XmlParseTask xmlParseTask = new XmlParseTask(new Callback() {
                             @Override
-                            public void onCallbackFinished(List<ZnamkyItem> result) {
+                            public void onCallbackFinished(Object result) {
 
                                 znamkyItemList.clear();
-                                znamkyItemList.addAll(result);
+                                znamkyItemList.addAll((List<ZnamkyItem>)result);
                                 adapter.notifyDataSetChanged();
                                 swipeRefreshLayout.setRefreshing(false);
                             }
@@ -133,6 +133,7 @@ public class ZnamkyActivity extends MainActivity implements SwipeRefreshLayout.O
         protected List<ZnamkyItem> doInBackground(String... xml) {
             List<ZnamkyItem> znamky = new ArrayList<>();
             XmlPullParserFactory parserFactory;
+
             try {
                 parserFactory = XmlPullParserFactory.newInstance();
                 XmlPullParser parser = parserFactory.newPullParser();
