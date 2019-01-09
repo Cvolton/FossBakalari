@@ -115,7 +115,7 @@ public class UkolyActivity extends MainActivity {
             String tagName, tagContent = "";
             int event = parser.getEventType();
 
-            Ukol currentUkol = new Ukol();
+            UkolItem currentUkol = new UkolItem();
 
             while (event != XmlPullParser.END_DOCUMENT) {
                 tagName = parser.getName();
@@ -151,7 +151,7 @@ public class UkolyActivity extends MainActivity {
         }
     }
 
-    public void renderUkol(Ukol currentUkol){
+    public void renderUkol(UkolItem currentUkol){
         String predmet = currentUkol.predmet;
         String popis = currentUkol.popis;
         String status = currentUkol.status;
